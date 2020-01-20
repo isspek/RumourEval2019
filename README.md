@@ -40,22 +40,22 @@ All models have been trained on RTX 2080 Ti (with 12 GB memory).
 ### Replication from ensemble predictions
 Since each trained model is saved in checkpoints of size 1.3GB, we do not provide these online.
 To replicate the ensemble results from paper, we provide a set of pre-calculated predictions from these trained models per validation set and per test set.
-The predictions on validation and test sets are saved as numpy arrays in [predictions](predictions) folder.
+The predictions on validation and test sets are saved as numpy arrays in [predictions](app/predictions) folder.
 
-Running [replicate_ensemble_results.py](replicate_ensemble_results.py) directly replicates ensemble results.
+Running [replicate_ensemble_results.py](app/replicate_ensemble_results.py) directly replicates ensemble results.
 
 ### Replication via training new models
-1. Make sure the value of `"active_model"` in [configurations/config.json](configurations/config.json) is set to `"BERT_textonly"`
+1. Make sure the value of `"active_model"` in [configurations/config.json](app/configurations/config.json) is set to `"BERT_textonly"`
 2. Run solver.py  
 
 Note: Mind that BERT often gets stuck in local minima. In our experiments, we took only results with 55 F1 on validation data or better.
-For the sake of convenience, you may want to modify last line of method `create_model` found in  [solutionsA.py](solutionsA.py) file to call 
+For the sake of convenience, you may want to modify last line of method `create_model` found in  [solutionsA.py](app/solutionsA.py) file to call 
  `modelframework.fit_multiple` instead of `modelframework.fit` to run model training multiple times.
 
 Duration of 1 training: ~ 30 minutes
 
 ### Replication of BiLSTM+SelfAtt baseline result
-1. Change value of `"active_model"` in [configurations/config.json](configurations/config.json) to `"self_att_with_bert_tokenizer"`
+1. Change value of `"active_model"` in [configurations/config.json](app/configurations/config.json) to `"self_att_with_bert_tokenizer"`
 2. Run solver.py
 
 Duration of 1 training: ~ 2.7 minutes
